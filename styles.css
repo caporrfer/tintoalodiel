@@ -1417,8 +1417,14 @@ p { text-wrap: pretty; }
     letter-spacing: 0.18em;
   }
   .hero-title { font-size: clamp(46px, 13vw, 72px); max-width: 12ch; }
-  .hero-cta { width: auto; justify-content: center; }
-  .hero-cta .btn { flex: 0 0 auto; padding: 12px 20px; font-size: 10px; letter-spacing: 0.2em; }
+  .hero-cta { width: auto; justify-content: center; gap: 8px; flex-wrap: wrap; }
+  .hero-cta .btn.hero-reserve {
+    flex: 0 0 auto;
+    width: auto;
+    padding: 11px 18px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+  }
 
   .events-grid { grid-template-columns: 1fr; }
   .galeria-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 130px; }
