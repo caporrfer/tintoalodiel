@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Del Tinto al Odiel · Aracena</title>
+<meta name="description" content="Restaurante en Aracena. Cocina tradicional, ibéricos D.O.P. Jabugo, parrilla de encina y bodega con más de sesenta referencias.">
+<meta name="theme-color" content="#181410">
+<meta property="og:title" content="Del Tinto al Odiel · Aracena">
+<meta property="og:description" content="Cocina de producto, brasa y vino en el corazón de la Sierra de Aracena.">
+<meta property="og:image" content="images/fachada.png">
+<meta property="og:locale" content="es_ES">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700&family=Petit+Formal+Script&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Restaurant","name":"Del Tinto al Odiel","image":"images/fachada.png","address":{"@type":"PostalAddress","streetAddress":"Don Ildefonso Calero Jiménez, 45","addressLocality":"Aracena","addressRegion":"Huelva","postalCode":"21200","addressCountry":"ES"},"telephone":"+34619028128","servesCuisine":["Tradicional","Parrilla","Ibéricos"],"priceRange":"€€","url":"https://deltintoalodiel.es"}
+</script>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER (común a todas las vistas)
+     ============================================================ -->
+<header class="header on-dark">
+  <button class="brand" data-nav="home" aria-label="Inicio">
+    <span class="brand-name">Del Tinto al Odiel</span>
+  </button>
+  <nav class="nav" aria-label="Principal">
+    <button data-nav="home">Inicio</button>
+    <button data-nav="carta">Carta</button>
+    <button data-nav="bodega">Bodega</button>
+    <button data-nav="eventos">Eventos</button>
+    <button data-nav="galeria">Galería</button>
+    <button data-nav="opiniones">Opiniones</button>
+    <button data-nav="contacto">Contacto</button>
+  </nav>
+  <button class="menu-toggle" data-menu-open aria-label="Abrir menú">
+    <span></span><span></span>
+  </button>
+</header>
+
+<!-- Mobile menu -->
+<aside id="mobile-menu" class="mobile-menu" aria-label="Menú">
+  <div class="mobile-menu-head">
+    <button class="brand" data-nav="home" data-menu-close>
+      <span class="brand-name">Del Tinto al Odiel</span>
+    </button>
+    <button class="mobile-close" data-menu-close aria-label="Cerrar">Cerrar</button>
+  </div>
+  <nav class="nav-list" aria-label="Secciones">
+    <button data-nav="home"><span>Inicio</span></button>
+    <button data-nav="carta"><span>Carta</span></button>
+    <button data-nav="bodega"><span>Bodega</span></button>
+    <button data-nav="eventos"><span>Eventos</span></button>
+    <button data-nav="galeria"><span>Galería</span></button>
+    <button data-nav="opiniones"><span>Opiniones</span></button>
+    <button data-nav="contacto"><span>Contacto</span></button>
+  </nav>
+  <div class="foot">
+    <a href="tel:+34619028128" style="font-family:var(--serif);font-size:22px;">619 02 81 28</a>
+    <span>Don Ildefonso Calero Jiménez, 45 · Aracena</span>
+    <button class="btn wine" data-reserve data-menu-close style="margin-top:14px;align-self:flex-start;">Reservar mesa</button>
+  </div>
+</aside>
+
+<!-- ============================================================
+     APP — secciones independientes
+     ============================================================ -->
+<main class="app">
+
+  <!-- ===== Inicio ===== -->
+  <section class="view view-home" data-view="home">
+    <div class="hero-photo">
+      <img src="images/sala-arcos.png" alt="Interior del comedor de arcos de Del Tinto al Odiel.">
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow reveal">
+        <span class="ornament"></span>
+        <span>Restaurante</span>
+        <span class="ornament"></span>
+      </div>
+      <h1 class="hero-title reveal d1">
+        <span class="line">Del Tinto</span>
+        <span class="line">al <span class="amper">Odiel</span></span>
+      </h1>
+      <p class="hero-tagline reveal d2">Cocina tradicional, parrilla de encina y bodega cuidada.</p>
+      <div class="hero-cta reveal d3">
+        <button class="btn hero-reserve" data-reserve>Reservar mesa</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Carta ===== -->
+  <section class="view view-carta" data-view="carta">
+    <div class="carta-inner">
+      <aside class="carta-side">
+        <div class="eyebrow">— Carta de la casa</div>
+        <h2>La carta,<br>al detalle.<span class="script">producto · brasa · vino</span></h2>
+        <nav class="carta-tabs" id="carta-tabs"></nav>
+        <div class="carta-side-foot">
+          IVA incluido. Pan y servicio 1,50€/comensal.<br>
+          Carta sujeta a temporada y mercado.
+        </div>
+      </aside>
+      <div class="carta-main">
+        <div class="carta-main-head" id="carta-head"></div>
+        <div class="menu-list" id="carta-list"></div>
+        <div class="carta-foot">
+          <span>¿Alergias o intolerancias? Consúltanos en sala.</span>
+          <button class="btn ghost" data-reserve>Reservar mesa</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Bodega ===== -->
+  <section class="view view-bodega" data-view="bodega">
+    <div class="bodega-inner">
+      <div class="bodega-left">
+        <div class="eyebrow reveal" style="color:var(--walnut);">— La bodega</div>
+        <h2 class="h1 reveal d1">Sesenta vinos<br><em>para acompañar</em><br>cada plato.</h2>
+        <p class="reveal d2">
+          Cruzamos las grandes denominaciones del país con las joyas locales
+          de la Sierra. La sala te recomienda según el día.
+        </p>
+        <div class="bodega-stats reveal d2">
+          <div class="bodega-stat"><strong>60+</strong><em>Referencias</em></div>
+          <div class="bodega-stat"><strong>12</strong><em>D.O. trabajadas</em></div>
+          <div class="bodega-stat"><strong>5</strong><em>Vinos por copa</em></div>
+        </div>
+        <button class="btn wine reveal d3" data-reserve>Reservar mesa</button>
+      </div>
+      <div class="bodega-right reveal d1">
+        <div class="bodega-card">
+          <div class="top">
+            <div>
+              <div class="eyebrow" style="color:var(--walnut);">— Maridajes</div>
+              <h4>Sugeridos para esta semana.</h4>
+            </div>
+            <span class="tag">Sala</span>
+          </div>
+          <div id="pairings"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Eventos ===== -->
+  <section class="view view-eventos" data-view="eventos">
+    <div class="eventos-inner">
+      <div class="eventos-left">
+        <div class="eyebrow reveal">— Eventos y celebraciones</div>
+        <h2 class="h1 reveal d1">Una sala<br>privada para<br>las <em>fechas que<br>cuentan</em>.</h2>
+        <p class="reveal d2" style="margin-top:18px;">
+          Bodega privada con servicio dedicado para comidas de empresa, celebraciones
+          familiares o cenas íntimas. Menús cerrados a medida.
+        </p>
+        <div class="events-grid reveal d2">
+          <div class="event-pill"><strong>Empresa</strong><span>Menús a medida</span></div>
+          <div class="event-pill"><strong>Familia</strong><span>Hasta 24 comensales</span></div>
+          <div class="event-pill"><strong>Privado</strong><span>Sala íntima</span></div>
+          <div class="event-pill"><strong>Maridaje</strong><span>Cata cerrada</span></div>
+        </div>
+        <div class="eventos-cta reveal d3">
+          <a href="tel:+34619028128" class="btn wine">Llamar a sala</a>
+          <button class="btn ghost" data-nav="contacto">Cómo llegar</button>
+        </div>
+      </div>
+      <div class="eventos-right">
+        <img src="images/sala-arcos.png" alt="Comedor de arcos de Del Tinto al Odiel">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Galería ===== -->
+  <section class="view view-galeria" data-view="galeria">
+    <div class="galeria-inner">
+      <div class="galeria-head">
+        <h2 class="h2 reveal">La casa,<span class="script">en imágenes</span></h2>
+        <div class="galeria-filter reveal d1">
+          <button class="active" data-filter="todo">Todo</button>
+          <button data-filter="plato">Platos</button>
+          <button data-filter="espacio">Espacios</button>
+          <button data-filter="producto">Producto</button>
+        </div>
+      </div>
+      <div class="galeria-grid" id="galeria-grid"></div>
+    </div>
+  </section>
+
+  <!-- ===== Opiniones ===== -->
+  <section class="view view-opiniones" data-view="opiniones">
+    <div class="opiniones-inner">
+      <aside class="opiniones-side">
+        <div class="eyebrow">— Opiniones</div>
+        <h2>Lo que dicen<br>los <em>clientes</em>.</h2>
+        <div class="rating-card">
+          <div class="top">
+            <svg class="gicon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+              <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+              <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+              <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+            </svg>
+            <span>Reseñas verificadas en Google</span>
+          </div>
+          <div class="score">
+            <span class="num">4,6<em>/5</em></span>
+            <div>
+              <div class="stars">★★★★★</div>
+            </div>
+          </div>
+          <div class="count">Basado en <strong>+700 reseñas</strong></div>
+          <a class="gmaps" href="https://maps.app.goo.gl/wG11AXeG9v4pcQAy8" target="_blank" rel="noopener">Ver todas en Google →</a>
+        </div>
+      </aside>
+      <div class="opiniones-main">
+        <div class="opiniones-grid" id="opiniones-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contacto ===== -->
+  <section class="view view-contacto" data-view="contacto">
+    <div class="contacto-inner">
+      <div class="contacto-left">
+        <div class="eyebrow reveal">— Ubicación &amp; contacto</div>
+        <h2 class="h1 reveal d1">Te esperamos<br>en <em>Aracena</em>.</h2>
+        <dl class="contacto-details reveal d2">
+          <div class="detail-row">
+            <dt>Dirección</dt>
+            <dd><strong>Don Ildefonso Calero, 45</strong>21200 Aracena, Huelva</dd>
+          </div>
+          <div class="detail-row">
+            <dt>Teléfono</dt>
+            <dd><a href="tel:+34619028128"><strong>619 02 81 28</strong></a>Llamada directa a sala</dd>
+          </div>
+          <div class="detail-row">
+            <dt>Horario</dt>
+            <dd><strong>13:30 – 16:00 · 20:30 – 23:30</strong>Horario sujeto a temporada</dd>
+          </div>
+          <div class="detail-row">
+            <dt>Mapa</dt>
+            <dd><a href="https://maps.app.goo.gl/wG11AXeG9v4pcQAy8" target="_blank" rel="noopener">Abrir en Google Maps →</a></dd>
+          </div>
+        </dl>
+        <div class="contacto-cta reveal d3">
+          <a href="tel:+34619028128" class="btn">Llamar</a>
+          <button class="btn ghost" data-reserve>Reservar</button>
+        </div>
+      </div>
+      <div class="map" aria-label="Mapa estilizado de la ubicación">
+        <span class="map-stamp">Aracena · Sierra de Huelva</span>
+        <svg viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M40 0 L0 0 0 40" fill="none" stroke="rgba(24,20,16,0.06)" stroke-width="1"/>
+            </pattern>
+          </defs>
+          <rect width="600" height="600" fill="#ece2cf"/>
+          <rect width="600" height="600" fill="url(#grid)"/>
+          <path d="M -20 220 Q 200 240 380 200 T 620 180" stroke="#fbf7ef" stroke-width="32" fill="none" stroke-linecap="round"/>
+          <path d="M 120 -20 L 90 300 L 130 500 L 110 620" stroke="#fbf7ef" stroke-width="22" fill="none" stroke-linecap="round"/>
+          <path d="M 280 -20 L 300 280 L 340 400 L 320 620" stroke="#fbf7ef" stroke-width="22" fill="none" stroke-linecap="round"/>
+          <path d="M 480 -20 L 460 280 L 500 460 L 480 620" stroke="#fbf7ef" stroke-width="22" fill="none" stroke-linecap="round"/>
+          <path d="M -20 420 Q 200 440 380 400 T 620 380" stroke="#fbf7ef" stroke-width="26" fill="none" stroke-linecap="round"/>
+          <path d="M 200 80 L 220 540" stroke="#fbf7ef" stroke-width="10" fill="none"/>
+          <path d="M 380 80 L 400 540" stroke="#fbf7ef" stroke-width="10" fill="none"/>
+          <rect x="140" y="240" width="50" height="60" fill="#e3d6bf"/>
+          <rect x="240" y="240" width="40" height="60" fill="#e3d6bf"/>
+          <rect x="310" y="220" width="60" height="80" fill="#e3d6bf"/>
+          <rect x="410" y="220" width="50" height="60" fill="#e3d6bf"/>
+          <rect x="140" y="340" width="50" height="60" fill="#e3d6bf"/>
+          <rect x="240" y="340" width="40" height="60" fill="#e3d6bf"/>
+          <rect x="310" y="340" width="60" height="60" fill="#e3d6bf"/>
+          <rect x="410" y="340" width="50" height="60" fill="#e3d6bf"/>
+          <circle cx="120" cy="170" r="55" fill="#d8d0b3"/>
+          <text x="120" y="175" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(24,20,16,0.5)" letter-spacing="2">PARQUE</text>
+          <text x="240" y="100" font-family="Cormorant Garamond, serif" font-style="italic" font-size="13" fill="rgba(24,20,16,0.4)">Gruta de las Maravillas</text>
+        </svg>
+        <div class="map-pin">
+          <span class="dot"></span>
+          <span class="label">Del Tinto al Odiel<em>D. Ildefonso Calero, 45</em></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     MODAL DE RESERVA
+     ============================================================ -->
+<div class="modal-backdrop" id="modal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="reserve-title">
+    <div class="modal-head">
+      <button class="modal-close" data-modal-close aria-label="Cerrar">×</button>
+      <div class="eyebrow">— Reserva</div>
+      <h3 id="reserve-title" style="margin-top:8px;">Una mesa, a tu nombre.</h3>
+      <p>Te confirmamos por teléfono en menos de una hora.</p>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
