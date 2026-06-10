@@ -1,8 +1,38 @@
-// Del Tinto al Odiel — SPA con secciones independientes
+// Del Tinto al Odiel — Editorial de la Sierra
+// One-page: velo de entrada, scrollspy, reveals, contadores, carta,
+// galería + lightbox, maridajes, opiniones y modal de reserva.
 
 (function () {
+  "use strict";
+
   const { MENU, MENU_ORDER, REVIEWS, PAIRINGS, GALLERY } = window.RESTAURANT_DATA;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+
+  // ---------- Velo de entrada ----------
+  const veil = document.getElementById("veil");
+  const seen = sessionStorage.getItem("veil-seen");
+  if (reduceMotion || seen) {
+    veil.remove();
+  } else {
+    sessionStorage.setItem("veil-seen", "1");
+    document.body.style.overflow = "hidden";
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        veil.classList.add("lift");
+        document.body.style.overflow = "";
+        setTimeout(() => veil.remove(), 1100);
+      }, 950);
+    });
+    // Red de seguridad si 'load' tarda demasiado (imágenes lentas)
+    setTimeout(() => {
+      if (document.body.contains(veil) && !veil.classList.contains("lift")) {
+        veil.classList.add("lift");
+        document.body.style.overflow = "";
+        setTimeout(() => veil.remove(), 1100);
+      }
+    }, 3200);
+  }
 
   // ---------- Utilidades de foco ----------
   const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -15,96 +45,133 @@
   }
   let lastFocused = null;
 
-  // ---------- Menú móvil ----------
-  const mobile = document.getElementById("mobile-menu");
-  const toggle = document.querySelector("[data-menu-open]");
-  function openMobile() {
-    lastFocused = document.activeElement;
-    mobile.classList.add("open");
-    mobile.setAttribute("aria-hidden", "false");
-    toggle && toggle.setAttribute("aria-expanded", "true");
-    document.body.style.overflow = "hidden";
-    const firstBtn = mobile.querySelector(".nav-list button");
-    if (firstBtn) firstBtn.focus();
-  }
-  function closeMobile(restore) {
-    if (!mobile.classList.contains("open")) return;
-    mobile.classList.remove("open");
-    mobile.setAttribute("aria-hidden", "true");
-    toggle && toggle.setAttribute("aria-expanded", "false");
-    document.body.style.overflow = "";
-    if (restore !== false && lastFocused) lastFocused.focus();
-  }
-  document.querySelectorAll("[data-menu-open]").forEach(b => b.addEventListener("click", openMobile));
-  document.querySelectorAll("[data-menu-close]").forEach(b => b.addEventListener("click", () => closeMobile()));
+  // ---------- Header: estado de scroll + ocultar al bajar ----------
+  const header = document.getElementById("header");
+  const hero = document.getElementById("inicio");
+  let lastY = window.scrollY;
+  let ticking = false;
 
-  // ---------- Barra de acción móvil ----------
-  const mobileBar = document.getElementById("mobile-bar");
-  function updateBar(view) {
-    // se oculta en Inicio (el hero ya tiene sus CTA) y cuando hay overlay abierto
-    const overlayOpen = mobile.classList.contains("open") ||
-      document.getElementById("modal").classList.contains("open") ||
-      document.getElementById("lightbox").classList.contains("open");
-    const show = view !== "home" && !overlayOpen;
-    mobileBar.classList.toggle("show", show);
-  }
+  function onScroll() {
+    const y = window.scrollY;
+    header.classList.toggle("scrolled", y > hero.offsetHeight - 90);
+    if (y > hero.offsetHeight && y > lastY + 6) header.classList.add("hidden");
+    else if (y < lastY - 6 || y <= hero.offsetHeight) header.classList.remove("hidden");
+    lastY = y;
 
-  // ---------- Routing ----------
-  const views = ["home", "carta", "bodega", "eventos", "galeria", "opiniones", "contacto"];
-  const header = document.querySelector(".header");
-  let currentView = "home";
+    // Progreso de lectura
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
 
-  function setView(name, push = true) {
-    if (!views.includes(name)) name = "home";
-    currentView = name;
-    document.querySelectorAll(".view").forEach(v => {
-      const on = v.dataset.view === name;
-      v.classList.toggle("active", on);
-      v.setAttribute("aria-hidden", on ? "false" : "true");
-    });
-    document.querySelectorAll("[data-nav]").forEach(b => b.classList.toggle("active", b.dataset.nav === name));
-
-    const onDark = (name === "home");
-    header.classList.toggle("on-dark", onDark);
-    header.classList.toggle("solid", !onDark);
-
-    document.querySelectorAll(".view").forEach(v => { v.scrollTop = 0; });
-
-    if (push) {
-      const hash = name === "home" ? "" : "#" + name;
-      if (window.location.hash !== hash) {
-        history.pushState({ view: name }, "", hash || window.location.pathname);
-      }
+    // Parallax suave del hero
+    if (!reduceMotion && y < window.innerHeight * 1.2) {
+      heroMedia.style.transform = `translateY(${y * 0.18}px)`;
     }
-    closeMobile(false);
-    updateBar(name);
-    document.title = (name === "home" ? "" : titleFor(name) + " · ") + "Del Tinto al Odiel · Aracena";
+
+    // Barra móvil: visible pasado el hero (si no hay overlay abierto)
+    updateBar();
+    ticking = false;
   }
-  function titleFor(n) {
-    return { carta: "Carta", bodega: "Bodega", eventos: "Eventos", galeria: "Galería", opiniones: "Opiniones", contacto: "Contacto" }[n] || "";
+  const progressBar = document.getElementById("progress-bar");
+  const heroMedia = document.getElementById("hero-media");
+  window.addEventListener("scroll", () => {
+    if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+  }, { passive: true });
+
+  // ---------- Scrollspy ----------
+  const navLinks = [...document.querySelectorAll(".nav a")];
+  const spyTargets = navLinks
+    .map(a => document.querySelector(a.getAttribute("href")))
+    .filter(Boolean);
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id));
+    });
+  }, { rootMargin: "-40% 0px -55% 0px" });
+  spyTargets.forEach(t => spy.observe(t));
+
+  // ---------- Reveals ----------
+  const revealer = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        en.target.classList.add("in");
+        revealer.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.18, rootMargin: "0px 0px -6% 0px" });
+  document.querySelectorAll("section, .marquee").forEach(s => revealer.observe(s));
+  // El hero se revela al cargar
+  requestAnimationFrame(() => hero.classList.add("in"));
+
+  // ---------- Contadores ----------
+  function animateCount(el) {
+    const target = parseFloat(el.dataset.count);
+    const decimals = parseInt(el.dataset.decimal || "0", 10);
+    const suffix = el.dataset.suffix || "";
+    if (reduceMotion) {
+      el.textContent = target.toFixed(decimals).replace(".", ",") + suffix;
+      return;
+    }
+    const dur = 1400;
+    const t0 = performance.now();
+    function tick(t) {
+      const p = Math.min((t - t0) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * eased).toFixed(decimals).replace(".", ",") + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
   }
+  const counter = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        animateCount(en.target);
+        counter.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll("[data-count]").forEach(el => counter.observe(el));
 
-  document.addEventListener("click", e => {
-    const t = e.target.closest("[data-nav]");
-    if (!t) return;
-    e.preventDefault();
-    setView(t.dataset.nav);
-  });
+  // ---------- Marquee: duplicar pista para bucle continuo ----------
+  const track = document.getElementById("marquee-track");
+  if (track && !reduceMotion) track.innerHTML += track.innerHTML;
 
-  window.addEventListener("popstate", () => {
-    const name = (window.location.hash || "#home").replace("#", "") || "home";
-    setView(name, false);
-  });
-
-  const initial = (window.location.hash || "#home").replace("#", "") || "home";
-  setView(initial, false);
+  // ---------- Imagen flotante en platos insignia ----------
+  const dishList = document.getElementById("dish-list");
+  const dishFloat = document.getElementById("dish-float");
+  if (dishList && dishFloat && finePointer && !reduceMotion) {
+    let fx = 0, fy = 0, tx = 0, ty = 0, rafId = null;
+    function loop() {
+      fx += (tx - fx) * 0.14;
+      fy += (ty - fy) * 0.14;
+      dishFloat.style.transform = `translate(${fx}px, ${fy}px) scale(1) rotate(2deg)`;
+      rafId = requestAnimationFrame(loop);
+    }
+    dishList.addEventListener("mousemove", e => {
+      tx = e.clientX + 28;
+      ty = e.clientY - 200;
+      // Evita que se salga por la derecha
+      tx = Math.min(tx, window.innerWidth - 310);
+    });
+    dishList.addEventListener("mouseover", e => {
+      const row = e.target.closest(".dish-row");
+      if (!row) return;
+      const src = row.dataset.img;
+      if (dishFloat.getAttribute("src") !== src) dishFloat.setAttribute("src", src);
+      dishFloat.classList.add("show");
+      if (!rafId) { fx = tx; fy = ty; loop(); }
+    });
+    dishList.addEventListener("mouseleave", () => {
+      dishFloat.classList.remove("show");
+      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    });
+  }
 
   // ---------- Carta ----------
   const tabsEl = document.getElementById("carta-tabs");
-  const mainHeadEl = document.getElementById("carta-head");
   const listEl = document.getElementById("carta-list");
 
-  function renderCarta(activeKey) {
+  function renderCarta(activeKey, animate = true) {
     tabsEl.innerHTML = MENU_ORDER.map(k => {
       const m = MENU[k];
       return `<button class="carta-tab ${k === activeKey ? "active" : ""}" data-tab="${k}" aria-pressed="${k === activeKey}">
@@ -115,44 +182,47 @@
     tabsEl.querySelectorAll(".carta-tab").forEach(t => t.addEventListener("click", () => renderCarta(t.dataset.tab)));
 
     const m = MENU[activeKey];
-    mainHeadEl.innerHTML = `<h3>${m.label}</h3><span class="meta">${m.items.length} platos</span>`;
+    listEl.classList.remove("fade");
     listEl.innerHTML = m.items.map(item => `
       <div class="menu-item">
-        <div>
-          <div class="menu-item-name">${item.name}${item.tag ? `<span class="menu-item-tag">${item.tag}</span>` : ""}</div>
-          <div class="menu-item-desc">${item.desc}</div>
+        <div class="mi-top">
+          <span class="mi-name">${item.name}${item.tag ? `<span class="mi-tag">${item.tag}</span>` : ""}</span>
+          <span class="mi-dots"></span>
+          <span class="mi-price">${item.price}</span>
         </div>
-        <div class="menu-item-price">${item.price}</div>
+        <div class="mi-desc">${item.desc}</div>
       </div>`).join("");
+    if (animate && !reduceMotion) {
+      void listEl.offsetWidth;
+      listEl.classList.add("fade");
+    }
 
     const activeTab = tabsEl.querySelector(".carta-tab.active");
     if (activeTab && tabsEl.scrollWidth > tabsEl.clientWidth) {
       activeTab.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", inline: "center", block: "nearest" });
     }
   }
-  renderCarta("parrilla");
+  renderCarta("parrilla", false);
 
-  // ---------- Bodega ----------
+  // ---------- Maridajes ----------
   const pairEl = document.getElementById("pairings");
   pairEl.innerHTML = PAIRINGS.map(p => `
     <div class="pair-row">
-      <div class="dish">${p.dish}</div>
-      <div class="wine-name"><strong>${p.wine}</strong><span class="note">${p.note}</span></div>
+      <div class="pair-dish">${p.dish}</div>
+      <div class="pair-wine"><strong>${p.wine}</strong><span class="note">${p.note}</span></div>
     </div>`).join("");
 
   // ---------- Opiniones ----------
   const opEl = document.getElementById("opiniones-grid");
-  if (opEl) {
-    opEl.innerHTML = REVIEWS.map(r => `
-      <article class="opinion">
-        <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
-        <p class="opinion-quote">«${r.text}»</p>
-        <div class="opinion-foot">
-          <span class="opinion-name">${r.name}</span>
-          <span class="opinion-meta">${r.meta} · ${r.when}</span>
-        </div>
-      </article>`).join("");
-  }
+  opEl.innerHTML = REVIEWS.map(r => `
+    <article class="opinion">
+      <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+      <p class="opinion-quote">«${r.text}»</p>
+      <div class="opinion-foot">
+        <span class="opinion-name">${r.name}</span>
+        <span class="opinion-meta">${r.meta} · ${r.when}</span>
+      </div>
+    </article>`).join("");
 
   // ---------- Galería + Lightbox ----------
   const galEl = document.getElementById("galeria-grid");
@@ -161,7 +231,7 @@
   function renderGallery(filter) {
     currentList = filter === "todo" ? GALLERY.slice() : GALLERY.filter(g => g.cat === filter);
     galEl.innerHTML = currentList.map((g, i) => `
-      <button class="galeria-cell ${i === 0 ? "feat" : ""}" data-cap="${g.cap}" data-i="${i}" aria-label="Ampliar: ${g.cap}">
+      <button class="galeria-cell" data-cap="${g.cap}" data-i="${i}" style="animation-delay:${Math.min(i * 0.05, 0.5)}s" aria-label="Ampliar: ${g.cap}">
         <img src="${g.src}" alt="${g.cap}" loading="lazy" decoding="async">
       </button>`).join("");
   }
@@ -180,6 +250,13 @@
   const lbCap = document.getElementById("lb-cap");
   let lbIndex = 0;
 
+  function showLb() {
+    const g = currentList[lbIndex];
+    if (!g) return;
+    lbImg.src = g.src;
+    lbImg.alt = g.cap;
+    lbCap.textContent = g.cap;
+  }
   function openLightbox(i) {
     lbIndex = i;
     showLb();
@@ -187,15 +264,8 @@
     lightbox.classList.add("open");
     lightbox.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
-    updateBar(currentView);
+    updateBar();
     lightbox.querySelector("[data-lb-close]").focus();
-  }
-  function showLb() {
-    const g = currentList[lbIndex];
-    if (!g) return;
-    lbImg.src = g.src;
-    lbImg.alt = g.cap;
-    lbCap.textContent = g.cap;
   }
   function moveLb(dir) {
     lbIndex = (lbIndex + dir + currentList.length) % currentList.length;
@@ -205,7 +275,7 @@
     lightbox.classList.remove("open");
     lightbox.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
-    updateBar(currentView);
+    updateBar();
     if (lastFocused) lastFocused.focus();
   }
   galEl.addEventListener("click", e => {
@@ -216,6 +286,41 @@
   lightbox.querySelector("[data-lb-prev]").addEventListener("click", () => moveLb(-1));
   lightbox.querySelector("[data-lb-next]").addEventListener("click", () => moveLb(1));
   lightbox.addEventListener("click", e => { if (e.target === lightbox) closeLightbox(); });
+
+  // ---------- Menú móvil ----------
+  const mobile = document.getElementById("mobile-menu");
+  const toggle = document.querySelector("[data-menu-open]");
+  function openMobile() {
+    lastFocused = document.activeElement;
+    mobile.classList.add("open");
+    mobile.setAttribute("aria-hidden", "false");
+    toggle.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    updateBar();
+    const firstLink = mobile.querySelector(".mobile-nav a");
+    if (firstLink) firstLink.focus();
+  }
+  function closeMobile(restore) {
+    if (!mobile.classList.contains("open")) return;
+    mobile.classList.remove("open");
+    mobile.setAttribute("aria-hidden", "true");
+    toggle.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    updateBar();
+    if (restore !== false && lastFocused) lastFocused.focus();
+  }
+  document.querySelectorAll("[data-menu-open]").forEach(b => b.addEventListener("click", openMobile));
+  document.querySelectorAll("[data-menu-close]").forEach(b => b.addEventListener("click", () => closeMobile(false)));
+
+  // ---------- Barra de acción móvil ----------
+  const mobileBar = document.getElementById("mobile-bar");
+  function updateBar() {
+    const overlayOpen = mobile.classList.contains("open") ||
+      backdrop.classList.contains("open") ||
+      lightbox.classList.contains("open");
+    const show = window.scrollY > hero.offsetHeight * 0.8 && !overlayOpen;
+    mobileBar.classList.toggle("show", show);
+  }
 
   // ---------- Modal de reserva ----------
   const backdrop = document.getElementById("modal");
@@ -252,13 +357,13 @@
           </select>
         </div>
         <div class="field full">
-          <label for="r-notes">Comentarios <span style="text-transform:none;letter-spacing:0;color:var(--mute);">(opcional)</span></label>
+          <label for="r-notes">Comentarios <span style="text-transform:none;letter-spacing:0;">(opcional)</span></label>
           <textarea id="r-notes" name="notes" rows="2" placeholder="Alergias, mesa preferida, ocasión..."></textarea>
         </div>
       </div>
       <div class="modal-foot">
         <p>¿Prefieres llamar? <a href="tel:+34619028128">619 02 81 28</a></p>
-        <button type="submit" class="btn wine">Solicitar reserva</button>
+        <button type="submit" class="btn btn-wine">Solicitar reserva</button>
       </div>
     </form>`;
 
@@ -268,9 +373,8 @@
     backdrop.classList.add("open");
     backdrop.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
-    updateBar(currentView);
-    const d = new Date();
-    document.getElementById("r-date").min = d.toISOString().slice(0, 10);
+    updateBar();
+    document.getElementById("r-date").min = new Date().toISOString().slice(0, 10);
     document.getElementById("r-name").focus();
 
     document.getElementById("reserve-form").addEventListener("submit", e => {
@@ -281,7 +385,7 @@
       const dateStr = new Date(data.date + "T00:00:00").toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" });
       modalBody.innerHTML = `
         <div class="confirmation">
-          <div class="script">¡Gracias!</div>
+          <div class="conf-script">¡Gracias!</div>
           <h4>Solicitud recibida</h4>
           <p>Te confirmamos por teléfono en breve. Si no recibes llamada en una hora, marca <strong>619 02 81 28</strong>.</p>
           <div class="summary">
@@ -290,23 +394,23 @@
             <div><span>Hora</span><strong>${data.time}</strong></div>
             <div><span>Comensales</span><strong>${data.people}</strong></div>
           </div>
-          <button type="button" class="btn ghost" data-modal-close>Cerrar</button>
+          <button type="button" class="btn btn-line-ink" data-modal-close>Cerrar</button>
         </div>`;
-      modalBody.querySelectorAll("[data-modal-close]").forEach(b => b.addEventListener("click", closeModal));
       const c = modalBody.querySelector("[data-modal-close]");
-      if (c) c.focus();
+      c.addEventListener("click", closeModal);
+      c.focus();
     });
   }
   function closeModal() {
     backdrop.classList.remove("open");
     backdrop.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
-    updateBar(currentView);
+    updateBar();
     if (lastFocused) lastFocused.focus();
   }
   document.querySelectorAll("[data-reserve]").forEach(b => b.addEventListener("click", e => { e.preventDefault(); openModal(); }));
   backdrop.addEventListener("click", e => { if (e.target === backdrop) closeModal(); });
-  document.querySelectorAll("[data-modal-close]").forEach(b => b.addEventListener("click", closeModal));
+  document.querySelectorAll(".modal-close").forEach(b => b.addEventListener("click", closeModal));
 
   // ---------- Teclado global ----------
   document.addEventListener("keydown", e => {
@@ -317,7 +421,7 @@
       return;
     }
     if (e.key === "Tab") {
-      if (backdrop.classList.contains("open")) trapFocus(backdrop, e);
+      if (backdrop.classList.contains("open")) trapFocus(backdrop.querySelector(".modal"), e);
       else if (lightbox.classList.contains("open")) trapFocus(lightbox, e);
       else if (mobile.classList.contains("open")) trapFocus(mobile, e);
     }
@@ -328,8 +432,8 @@
   });
 
   // ---------- Año ----------
-  const y = document.getElementById("year");
-  if (y) y.textContent = new Date().getFullYear();
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-  window.__nav = setView;
+  // Estado inicial
+  onScroll();
 })();
