@@ -198,9 +198,15 @@
       listEl.classList.add("fade");
     }
 
+    // Centrar la pestaña activa SOLO desplazando el contenedor en horizontal
+    // (scrollIntoView también desplazaba la página verticalmente al cargar).
     const activeTab = tabsEl.querySelector(".carta-tab.active");
     if (activeTab && tabsEl.scrollWidth > tabsEl.clientWidth) {
-      activeTab.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", inline: "center", block: "nearest" });
+      const target = activeTab.offsetLeft - (tabsEl.clientWidth - activeTab.offsetWidth) / 2;
+      tabsEl.scrollTo({
+        left: Math.max(0, target),
+        behavior: animate && !reduceMotion ? "smooth" : "auto",
+      });
     }
   }
   renderCarta("parrilla", false);

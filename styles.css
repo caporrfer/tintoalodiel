@@ -1134,6 +1134,8 @@ body::after {
   .nav { display: none; }
   .burger { display: flex; }
   .header-tel { display: none; }
+  /* Sin la nav visible, empuja el bloque del menú al borde derecho */
+  .nav + .header-right { margin-left: auto; }
 
   .casa-grid, .bodega-grid, .eventos-grid, .contacto-grid {
     grid-template-columns: 1fr;
