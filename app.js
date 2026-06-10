@@ -12,7 +12,8 @@
   // ---------- Velo de entrada ----------
   const veil = document.getElementById("veil");
   const seen = sessionStorage.getItem("veil-seen");
-  if (reduceMotion || seen) {
+  const skipVeil = new URLSearchParams(location.search).has("noveil");
+  if (reduceMotion || seen || skipVeil) {
     veil.remove();
   } else {
     sessionStorage.setItem("veil-seen", "1");

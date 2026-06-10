@@ -945,6 +945,7 @@ body::after {
   display: block;
   font-family: var(--font-mono); font-style: normal; font-size: 9.5px;
   letter-spacing: 0.08em; color: var(--ink-faint);
+  white-space: nowrap;
 }
 .map-cta { position: absolute; right: 16px; bottom: 16px; }
 
@@ -1152,43 +1153,111 @@ body::after {
   .header .btn { display: none; }
   .brand-text { font-size: 17px; }
 
+  /* —— Hero centrado —— */
   .hero-rail { display: none; }
-  .hero-body { padding-bottom: 130px; }
+  .hero-body {
+    padding-bottom: 118px;
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center;
+  }
+  .hero-eyebrow { justify-content: center; font-size: 11px; letter-spacing: 0.24em; text-align: center; }
+  .hero-eyebrow .tick { display: none; }
   .hero-title { font-size: clamp(52px, 16.5vw, 80px); }
-  .hero-cta .btn { flex: 1 1 100%; }
-  .hero-foot { flex-direction: column; align-items: flex-start; gap: 16px; padding-bottom: 22px; }
+  .hero-sub { font-size: 16px; padding: 0 4px; }
+  .hero-cta { width: 100%; max-width: 360px; flex-direction: column; gap: 12px; }
+  .hero-cta .btn { width: 100%; }
+  .hero-foot {
+    flex-direction: column; align-items: center; gap: 10px;
+    padding-bottom: 26px; text-align: center;
+  }
+  .hf-left { font-size: 10px; letter-spacing: 0.14em; }
   .hf-scroll { display: none; }
 
+  .marquee { padding: 14px 0; }
+  .marquee-track span { font-size: 16px; }
+
+  /* —— Cabeceras de sección centradas —— */
+  .kicker { justify-content: center; }
+  .k-num { display: none; }
+  .kicker::after { content: ""; width: 34px; height: 1px; background: currentColor; opacity: 0.6; flex-shrink: 0; }
+  .display { text-align: center; }
+  .lead, .body-copy { text-align: center; margin-left: auto; margin-right: auto; }
+  .dropcap { float: none; font-size: inherit; padding: 0; color: inherit; font-family: inherit; font-weight: inherit; }
+
+  .casa-stats { justify-content: center; text-align: center; gap: 22px; }
+  .stat { flex: 1; }
+  .casa-collage { padding: 34px 6% 16% 6%; }
+  .cc-badge { left: -6px; width: 106px; height: 106px; }
+
+  /* —— Platos insignia —— */
   .dish-row {
     grid-template-columns: 34px 1fr auto;
     grid-template-areas: "num name price" "num desc desc";
     row-gap: 4px;
+    padding-left: 2px; padding-right: 2px;
   }
   .dr-num { grid-area: num; }
-  .dr-name { grid-area: name; }
-  .dr-desc { grid-area: desc; }
-  .dr-price { grid-area: price; padding-right: 0; }
+  .dr-name { grid-area: name; font-size: 21px; }
+  .dr-desc { grid-area: desc; font-size: 13.5px; }
+  .dr-price { grid-area: price; padding-right: 0; font-size: 13.5px; }
+  .dish-row:hover { padding-left: 2px; background: none; }
   .dish-row::after { display: none; }
   .dish-float { display: none; }
 
-  .carta-list { grid-template-columns: 1fr; }
-  .carta-note { text-align: left; }
-  .carta-foot { flex-direction: column; align-items: flex-start; }
+  /* —— Carta —— */
+  .carta-head { flex-direction: column; align-items: center; gap: 18px; }
+  .carta-note { text-align: center; }
+  .carta-tabs { margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter); }
+  .carta-list { grid-template-columns: 1fr; gap: 2px; }
+  .carta-body { min-height: 0; }
+  .menu-item { padding: 14px 2px; }
+  .mi-name { font-size: 19px; }
+  .carta-foot { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+  .carta-foot .btn { width: 100%; max-width: 360px; }
 
-  .op-grid { grid-template-columns: 1fr; }
-  .opinion, .opinion:nth-child(3n+1), .opinion:nth-child(3n+2) { transform: none; }
+  /* —— Bodega / Eventos —— */
+  .bodega-stats { justify-content: center; text-align: center; gap: 22px; margin: 30px 0; }
+  .bodega-text { display: flex; flex-direction: column; align-items: center; }
+  .bodega-text .btn { width: 100%; max-width: 360px; }
+  .bodega-word { display: none; }
+  .pair-row { grid-template-columns: 1fr; gap: 2px; padding: 14px 2px; }
+  .pair-row:hover { padding-left: 2px; background: none; }
+  .pair-dish { font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.08em; font-family: var(--font-mono); color: var(--gold-soft); }
 
+  .eventos-pills { grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 28px; }
+  .eventos-pills li { padding: 14px 14px; text-align: center; }
+  .eventos-pills strong { font-size: 17px; }
+  .eventos-pills span { font-size: 12px; }
+  .eventos-cta { flex-direction: column; align-items: center; width: 100%; }
+  .eventos-cta .btn { width: 100%; max-width: 360px; }
+  .eventos-media { transform: rotate(0deg); }
+
+  /* —— Galería / Opiniones —— */
+  .galeria-head { flex-direction: column; align-items: center; gap: 20px; }
+  .galeria-filter { justify-content: center; }
   .galeria-grid { columns: 2; column-gap: 10px; }
   .galeria-cell { margin-bottom: 10px; }
   .galeria-cell::after { opacity: 1; transform: none; padding: 22px 10px 8px; font-size: 13px; }
 
-  .eventos-pills { grid-template-columns: 1fr; }
-  .contacto-details > div { grid-template-columns: 1fr; gap: 4px; padding: 14px 0; }
+  .op-head { flex-direction: column; align-items: center; gap: 22px; }
+  .op-score { width: 100%; max-width: 420px; }
+  .op-grid { grid-template-columns: 1fr; }
+  .opinion, .opinion:nth-child(3n+1), .opinion:nth-child(3n+2) { transform: none; }
+
+  /* —— Contacto —— */
+  .contacto-text { display: flex; flex-direction: column; align-items: center; }
+  .contacto-details { width: 100%; }
+  .contacto-details > div { grid-template-columns: 1fr; gap: 4px; padding: 14px 0; text-align: center; }
+  .contacto-details dt { padding-top: 0; }
+  .contacto-cta { width: 100%; flex-direction: column; align-items: center; }
+  .contacto-cta .btn { width: 100%; max-width: 360px; }
   .map { aspect-ratio: 1 / 1.1; }
   .map-pin .label { font-size: 14px; padding: 8px 12px; }
 
   .mobile-bar { display: flex; }
-  .footer-word { font-size: 13.5vw; }
+  .footer-word { font-size: 9.6vw; }
+  /* Hueco para que la barra flotante no tape el footer */
+  .footer-row { padding-bottom: 110px; }
   .lb-btn { width: 44px; }
   .field-group { grid-template-columns: 1fr; }
 }
