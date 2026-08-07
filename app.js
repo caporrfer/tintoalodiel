@@ -103,6 +103,9 @@
   document.querySelectorAll("section, .marquee").forEach(s => revealer.observe(s));
   // El hero se revela al cargar
   requestAnimationFrame(() => hero.classList.add("in"));
+  // Los enlaces directos a una sección deben ser visibles desde el primer frame.
+  const deepLinkTarget = location.hash && document.querySelector(location.hash);
+  if (deepLinkTarget && deepLinkTarget.matches("section")) deepLinkTarget.classList.add("in");
 
   // ---------- Contadores ----------
   function animateCount(el) {
@@ -190,14 +193,20 @@
         <figcaption>${m.imageCaption}</figcaption>
       </figure>
       <div class="carta-items">
-        ${m.items.map(item => `
+        ${m.items.map((item, index) => `
           <div class="menu-item">
-            <div class="mi-top">
-              <span class="mi-name">${item.name}${item.tag ? `<span class="mi-tag">${item.tag}</span>` : ""}</span>
-              <span class="mi-dots"></span>
-              <span class="mi-price">${item.price}</span>
+            <div class="mi-photo">
+              <img src="${m.images[index]}" alt="${m.images[index].includes('/menu-stock/') ? 'Imagen de referencia de' : 'Foto de'} ${item.name}" width="640" height="480" loading="lazy" decoding="async">
+              <span>${m.images[index].includes('/menu-stock/') ? 'Imagen de referencia' : 'Del Tinto al Odiel'}</span>
             </div>
-            <div class="mi-desc">${item.desc}</div>
+            <div class="mi-copy">
+              <div class="mi-top">
+                <span class="mi-name">${item.name}${item.tag ? `<span class="mi-tag">${item.tag}</span>` : ""}</span>
+                <span class="mi-dots"></span>
+                <span class="mi-price">${item.price}</span>
+              </div>
+              <div class="mi-desc">${item.desc}</div>
+            </div>
           </div>`).join("")}
       </div>`;
     if (animate && !reduceMotion) {

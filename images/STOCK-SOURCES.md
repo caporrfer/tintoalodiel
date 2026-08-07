@@ -1,5 +1,31 @@
-# Stock photo sources
+# Fuentes de las fotografías de stock
 
-- `stock-pescado.webp` — Caroline Attwood, [Unsplash photo bpPTlXWTOvg](https://unsplash.com/photos/bpPTlXWTOvg), used under the [Unsplash licence](https://unsplash.com/license).
+Imágenes de referencia utilizadas en la carta. No representan necesariamente el emplatado exacto del restaurante.
 
-The menu labels this photograph as a reference image so it is not confused with the restaurant's exact plating.
+- `images/menu-stock/menu-tabla-ibericos.webp` — [Charcuterie board with cured meats, cheese, and pickles.](https://unsplash.com/photos/charcuterie-board-with-cured-meats-cheese-and-pickles-EK9FWSXIS3k) · Luna Wang · [Unsplash](https://unsplash.com/license)
+- `images/menu-stock/menu-jamon-bellota.webp` — [amada jamon serrano](https://www.flickr.com/photos/49215102@N00/3588137602) · goodiesfirst · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-cana-presa.webp` — [Charcuterie board with cured meats, cheese, and pickles.](https://unsplash.com/photos/charcuterie-board-with-cured-meats-cheese-and-pickles-EK9FWSXIS3k) · Luna Wang · [Unsplash](https://unsplash.com/license)
+- `images/menu-stock/menu-pan-jamon.webp` — [014405 - Tostada con tomate y jamón](https://www.flickr.com/photos/12066793@N05/49990581971) · M.Peinado · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-pan-lomo-orza.webp` — [Smoked pork neck with braised beans, fried duck egg and toast at St Ali in South Melbourne](https://www.flickr.com/photos/34948727@N00/13944540313) · ultrakml · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-pan-queso-anchoas.webp` — [love your white anchovy toast at nicli next door](https://www.flickr.com/photos/35034347371@N01/20584970815) · roland · [CC0](https://creativecommons.org/publicdomain/zero/1.0/)
+- `images/menu-stock/menu-pan-bacalao.webp` — [Poached eggs on toast with smoked salmon and avocado at Anvil Coffee Company in Artarmon](https://www.flickr.com/photos/34948727@N00/17554563303) · ultrakml · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-revuelto-boletus.webp` — [Scrambled egg mushroom pile](https://www.flickr.com/photos/28435100@N00/6644708973) · nordique · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-huevos-jamon.webp` — [Huevos rotos con jamón](https://www.flickr.com/photos/62518311@N00/4263370500) · Daquella manera · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-huevos-lomo.webp` — [Gasolina Cafe's Patatas Bravas. The most mouthwatering and ultimate hangover cure. Home #fries, #chorizo, #jamon, and #sunnysideup #fried #egg. #potatoes #farmtotable #brunch #getinmybelly #foodie #foodpic #foodporn #instafood #foodies #breakfast Photo by](https://www.flickr.com/photos/67839741@N06/18059470714) · L.A. Foodie · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-carrilleras-vino.webp` — [•Beef Rendang• Yummmmmmm! ⭐⭐⭐⭐ stars for this yummy thang! Malaysian braised beef stew with coconut and spices. #zomato #zomatomeetup #qatar #tradervics #foodie](https://www.flickr.com/photos/32031278@N03/21265715532) · debbietingzon · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-albondigas-setas.webp` — [Albóndigas en Salsa](https://www.flickr.com/photos/29120766@N07/4353663999) · Silverman68 · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-secreto-tomate.webp` — [July 8, 07 Pork in tomato sauce , caprese salad](https://www.flickr.com/photos/89626269@N00/762882833) · redazadi · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-croquetas-jamon.webp` — [Croquetas de jamón](https://www.flickr.com/photos/29120766@N07/5921994869) · Silverman68 · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-bacalao-plancha.webp` — [north end grill cod throats meuniére](https://www.flickr.com/photos/49215102@N00/7354306728) · goodiesfirst · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-bacalao-riojana.webp` — [Bacalao Macerado en Aceite de Oliva con Sal del Himalaya y Tomate Pera Rallado](https://www.flickr.com/photos/22662305@N04/2973490077) · jlastras · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-bacalao-confitado.webp` — [Bacalao confitado al aroma de ajo y manitas de cerdo guisadas](https://www.flickr.com/photos/29120766@N07/8337239309) · Silverman68 · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-presa-iberica.webp` — [Grilled pork steak on a barbecue](https://www.flickr.com/photos/26344495@N05/47006210954) · Ivan Radic · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-solomillo-iberico.webp` — [Grilled Pork Tenderloin](https://www.flickr.com/photos/93027286@N06/9116376615) · simmsrestaurants · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-secreto-iberico.webp` — [grilled pork chops, aparagus, and green beans](https://www.flickr.com/photos/73645804@N00/5649568108) · woodleywonderworks · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-chuletas-cordero.webp` — [grilled lamb chops](https://www.flickr.com/photos/46183897@N00/5510832549) · gurdonark · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-entrecot-vacuno.webp` — [Mmm... Grilled steak for the win](https://www.flickr.com/photos/7927684@N03/7054702687) · jeffreyw · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-arroz-leche.webp` — [Coconut rice pudding - Arroz con leche de coco](https://www.flickr.com/photos/35022955@N06/6973790316) · Lablascovegmenu · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-flan-castana.webp` — [Caramel Flan](https://www.flickr.com/photos/67839741@N06/12786400883) · L.A. Foodie · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-tarta-queso.webp` — [Successful Baked Cheesecake](https://www.flickr.com/photos/62961837@N00/513092634) · c.j.b · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/menu-stock/menu-natillas.webp` — [Steamed syrup pudding with custard! :) #dessert #food #puddings #iphonephotography #iphoneography #instagram](https://www.flickr.com/photos/91198056@N00/8296893102) · Podknox · [BY](https://creativecommons.org/licenses/by/2.0/)
+- `images/stock-pescado.webp` — [Unsplash photo bpPTlXWTOvg](https://unsplash.com/photos/bpPTlXWTOvg) · Caroline Attwood · [Unsplash](https://unsplash.com/license)
