@@ -184,15 +184,22 @@
 
     const m = MENU[activeKey];
     listEl.classList.remove("fade");
-    listEl.innerHTML = m.items.map(item => `
-      <div class="menu-item">
-        <div class="mi-top">
-          <span class="mi-name">${item.name}${item.tag ? `<span class="mi-tag">${item.tag}</span>` : ""}</span>
-          <span class="mi-dots"></span>
-          <span class="mi-price">${item.price}</span>
-        </div>
-        <div class="mi-desc">${item.desc}</div>
-      </div>`).join("");
+    listEl.innerHTML = `
+      <figure class="carta-photo">
+        <img src="${m.image}" alt="${m.imageAlt}" width="1200" height="900" loading="lazy" decoding="async">
+        <figcaption>${m.imageCaption}</figcaption>
+      </figure>
+      <div class="carta-items">
+        ${m.items.map(item => `
+          <div class="menu-item">
+            <div class="mi-top">
+              <span class="mi-name">${item.name}${item.tag ? `<span class="mi-tag">${item.tag}</span>` : ""}</span>
+              <span class="mi-dots"></span>
+              <span class="mi-price">${item.price}</span>
+            </div>
+            <div class="mi-desc">${item.desc}</div>
+          </div>`).join("")}
+      </div>`;
     if (animate && !reduceMotion) {
       void listEl.offsetWidth;
       listEl.classList.add("fade");

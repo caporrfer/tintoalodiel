@@ -4,6 +4,9 @@
 const MENU = {
   chacinas: {
     label: "Chacinas",
+    image: "images/jamon-soporte.png",
+    imageAlt: "Jamón ibérico D.O.P. Jabugo dispuesto para el corte",
+    imageCaption: "Jamón D.O.P. Jabugo",
     items: [
       { name: "Tabla de ibéricos de la casa", desc: "Jamón, lomo, caña y chorizo de bellota.", price: "22,00€" },
       { name: "Jamón 100% bellota D.O.P. Jabugo", desc: "Cortado a cuchillo en sala.", price: "26,00€", tag: "D.O.P." },
@@ -12,6 +15,9 @@ const MENU = {
   },
   panes: {
     label: "Panes y salmorejo",
+    image: "images/panes-anchoas.png",
+    imageAlt: "Pan tostado con anchoa servido en Del Tinto al Odiel",
+    imageCaption: "Pan y anchoa",
     items: [
       { name: "Con jamón de bellota", desc: "Pan tostado, salmorejo y jamón ibérico.", price: "9,80€" },
       { name: "Con lomo de orza", desc: "Lomo en aceite y especias.", price: "9,50€" },
@@ -21,6 +27,9 @@ const MENU = {
   },
   huevos: {
     label: "Con dos huevos",
+    image: "images/huevos-jamon.png",
+    imageAlt: "Huevos rotos con patatas y jamón ibérico",
+    imageCaption: "Huevos rotos con jamón",
     items: [
       { name: "Revuelto de boletus", desc: "Boletus al ajillo y huevo al punto.", price: "13,90€" },
       { name: "Huevos rotos con jamón", desc: "Patata casera, huevo y jamón ibérico.", price: "14,50€", tag: "Top" },
@@ -29,6 +38,9 @@ const MENU = {
   },
   guisos: {
     label: "Guisos",
+    image: "images/carrilleras.png",
+    imageAlt: "Carrilleras cocinadas lentamente al vino tinto",
+    imageCaption: "Carrilleras al vino",
     items: [
       { name: "Carrilleras al vino tinto", desc: "Seis horas a fuego bajo. Nuestro guiso insignia.", price: "17,50€", tag: "Casa" },
       { name: "Albóndigas de cerdo ibérico", desc: "Salsa de setas de temporada.", price: "15,80€" },
@@ -38,6 +50,9 @@ const MENU = {
   },
   mar: {
     label: "Del mar",
+    image: "images/stock-pescado.webp",
+    imageAlt: "Pescado a la plancha acompañado de verduras",
+    imageCaption: "Del mar · Imagen de referencia",
     items: [
       { name: "Bacalao a la plancha", desc: "Lomo grueso, piel crujiente.", price: "19,50€" },
       { name: "Bacalao a la riojana", desc: "Sofrito de pimientos rojos.", price: "19,80€" },
@@ -46,6 +61,9 @@ const MENU = {
   },
   parrilla: {
     label: "Parrilla",
+    image: "images/entrecot.png",
+    imageAlt: "Entrecot de vacuno a la parrilla",
+    imageCaption: "Entrecot a la parrilla",
     items: [
       { name: "Presa ibérica", desc: "Brasa de encina y flor de sal.", price: "18,50€" },
       { name: "Solomillo ibérico", desc: "Pieza entera, guarnición casera.", price: "19,80€" },
@@ -56,6 +74,9 @@ const MENU = {
   },
   postres: {
     label: "Postres",
+    image: "images/flan-castana.png",
+    imageAlt: "Flan de castaña servido con helado",
+    imageCaption: "Flan de castaña",
     items: [
       { name: "Arroz con leche", desc: "Costra de canela tostada al momento.", price: "5,80€" },
       { name: "Flan de castaña", desc: "Castaña de la Sierra y helado.", price: "6,50€", tag: "Sierra" },

@@ -623,11 +623,42 @@ body::after {
 
 .carta-body { padding-top: clamp(28px, 4vw, 44px); min-height: 380px; }
 .carta-list {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 6px clamp(40px, 6vw, 90px);
+  display: grid; grid-template-columns: minmax(240px, 0.78fr) minmax(0, 1.6fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: start;
 }
 .carta-list.fade { animation: carta-in 0.5s var(--ease-out); }
 @keyframes carta-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+.carta-photo {
+  position: sticky; top: 112px;
+  aspect-ratio: 4 / 5;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--paper-2);
+  box-shadow: 0 24px 48px -34px rgba(34, 23, 17, 0.48);
+}
+.carta-photo::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 62%, rgba(23, 12, 8, 0.62));
+  pointer-events: none;
+}
+.carta-photo img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.75s var(--ease-out);
+}
+.carta-photo:hover img { transform: scale(1.035); }
+.carta-photo figcaption {
+  position: absolute; z-index: 1; left: 18px; right: 18px; bottom: 16px;
+  font-family: var(--font-mono); font-size: 9.5px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--cream);
+}
+.carta-items {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6px clamp(28px, 4vw, 62px);
+}
 
 .menu-item {
   display: flex; flex-direction: column; gap: 4px;
@@ -1210,7 +1241,9 @@ body::after {
   .carta-head { flex-direction: column; align-items: center; gap: 18px; }
   .carta-note { text-align: center; }
   .carta-tabs { margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter); }
-  .carta-list { grid-template-columns: 1fr; gap: 2px; }
+  .carta-list { grid-template-columns: 1fr; gap: 28px; }
+  .carta-photo { position: relative; top: auto; aspect-ratio: 16 / 9; }
+  .carta-items { grid-template-columns: 1fr; gap: 2px; }
   .carta-body { min-height: 0; }
   .menu-item { padding: 14px 2px; }
   .mi-name { font-size: 19px; }
