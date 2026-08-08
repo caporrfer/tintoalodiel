@@ -188,16 +188,11 @@
     const m = MENU[activeKey];
     listEl.classList.remove("fade");
     listEl.innerHTML = `
-      <figure class="carta-photo">
-        <img src="${m.image}" alt="${m.imageAlt}" width="1200" height="900" loading="lazy" decoding="async">
-        <figcaption>${m.imageCaption}</figcaption>
-      </figure>
       <div class="carta-items">
         ${m.items.map((item, index) => `
           <div class="menu-item">
             <div class="mi-photo">
-              <img src="${m.images[index]}" alt="${m.images[index].includes('/menu-stock/') ? 'Imagen de referencia de' : 'Foto de'} ${item.name}" width="640" height="480" loading="lazy" decoding="async">
-              <span>${m.images[index].includes('/menu-stock/') ? 'Imagen de referencia' : 'Del Tinto al Odiel'}</span>
+              <img src="${m.images[index]}" alt="${item.name}" width="640" height="480" loading="lazy" decoding="async">
             </div>
             <div class="mi-copy">
               <div class="mi-top">

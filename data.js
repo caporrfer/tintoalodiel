@@ -4,9 +4,6 @@
 const MENU = {
   chacinas: {
     label: "Chacinas",
-    image: "images/jamon-soporte.png",
-    imageAlt: "Jamón ibérico D.O.P. Jabugo dispuesto para el corte",
-    imageCaption: "Jamón D.O.P. Jabugo",
     images: ["images/menu-stock/menu-tabla-ibericos.webp", "images/jamon-soporte.png", "images/menu-stock/menu-cana-presa.webp"],
     items: [
       { name: "Tabla de ibéricos de la casa", desc: "Jamón, lomo, caña y chorizo de bellota.", price: "22,00€" },
@@ -16,9 +13,6 @@ const MENU = {
   },
   panes: {
     label: "Panes y salmorejo",
-    image: "images/panes-anchoas.png",
-    imageAlt: "Pan tostado con anchoa servido en Del Tinto al Odiel",
-    imageCaption: "Pan y anchoa",
     images: ["images/menu-stock/menu-pan-jamon.webp", "images/menu-stock/menu-pan-lomo-orza.webp", "images/panes-anchoas.png", "images/menu-stock/menu-pan-bacalao.webp"],
     items: [
       { name: "Con jamón de bellota", desc: "Pan tostado, salmorejo y jamón ibérico.", price: "9,80€" },
@@ -29,9 +23,6 @@ const MENU = {
   },
   huevos: {
     label: "Con dos huevos",
-    image: "images/huevos-jamon.png",
-    imageAlt: "Huevos rotos con patatas y jamón ibérico",
-    imageCaption: "Huevos rotos con jamón",
     images: ["images/menu-stock/menu-revuelto-boletus.webp", "images/huevos-jamon.png", "images/menu-stock/menu-huevos-lomo.webp"],
     items: [
       { name: "Revuelto de boletus", desc: "Boletus al ajillo y huevo al punto.", price: "13,90€" },
@@ -41,9 +32,6 @@ const MENU = {
   },
   guisos: {
     label: "Guisos",
-    image: "images/carrilleras.png",
-    imageAlt: "Carrilleras cocinadas lentamente al vino tinto",
-    imageCaption: "Carrilleras al vino",
     images: ["images/carrilleras.png", "images/menu-stock/menu-albondigas-setas.webp", "images/menu-stock/menu-secreto-tomate.webp", "images/menu-stock/menu-croquetas-jamon.webp"],
     items: [
       { name: "Carrilleras al vino tinto", desc: "Seis horas a fuego bajo. Nuestro guiso insignia.", price: "17,50€", tag: "Casa" },
@@ -54,9 +42,6 @@ const MENU = {
   },
   mar: {
     label: "Del mar",
-    image: "images/stock-pescado.webp",
-    imageAlt: "Pescado a la plancha acompañado de verduras",
-    imageCaption: "Del mar · Imagen de referencia",
     images: ["images/menu-stock/menu-bacalao-plancha.webp", "images/menu-stock/menu-bacalao-riojana.webp", "images/menu-stock/menu-bacalao-confitado.webp"],
     items: [
       { name: "Bacalao a la plancha", desc: "Lomo grueso, piel crujiente.", price: "19,50€" },
@@ -66,9 +51,6 @@ const MENU = {
   },
   parrilla: {
     label: "Parrilla",
-    image: "images/entrecot.png",
-    imageAlt: "Entrecot de vacuno a la parrilla",
-    imageCaption: "Entrecot a la parrilla",
     images: ["images/menu-stock/menu-presa-iberica.webp", "images/solomillo.png", "images/menu-stock/menu-secreto-iberico.webp", "images/menu-stock/menu-chuletas-cordero.webp", "images/entrecot.png"],
     items: [
       { name: "Presa ibérica", desc: "Brasa de encina y flor de sal.", price: "18,50€" },
@@ -80,9 +62,6 @@ const MENU = {
   },
   postres: {
     label: "Postres",
-    image: "images/flan-castana.png",
-    imageAlt: "Flan de castaña servido con helado",
-    imageCaption: "Flan de castaña",
     images: ["images/menu-stock/menu-arroz-leche.webp", "images/flan-castana.png", "images/menu-stock/menu-tarta-queso.webp", "images/menu-stock/menu-natillas.webp"],
     items: [
       { name: "Arroz con leche", desc: "Costra de canela tostada al momento.", price: "5,80€" },
